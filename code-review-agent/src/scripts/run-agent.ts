@@ -13,6 +13,8 @@ async function runAgent({ query }: UserInputQuery) {
             prompt: `Assist with user query ${query} and respond with ANSWER: [your answer]`
         })
 
+        console.debug("model using: ",)
+
         for await (const chunk of result.fullStream) {
             switch (chunk.type) {
                 case "text-delta":

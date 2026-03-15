@@ -4,7 +4,8 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "agent": "bun src/scripts/run-agent.ts"
+    "agent": "bun src/scripts/run-agent.ts",
+    "ffm": "bun src/utils/fetch-free-models.ts"
   },
   "devDependencies": {
     "@types/bun": "latest"
@@ -15,11 +16,13 @@
   "dependencies": {
     "@ai-sdk/google": "^3.0.34",
     "@chroma-core/google-gemini": "^0.1.8",
+    "@inquirer/prompts": "^8.3.0",
     "@octokit/rest": "^22.0.1",
     "@openrouter/ai-sdk-provider": "^2.2.3",
     "ai": "^6.0.105",
     "chat": "^4.15.0",
     "chromadb": "^3.3.1",
+    "inquirer": "^13.3.0",
     "zod": "^4.3.6"
   }
 }

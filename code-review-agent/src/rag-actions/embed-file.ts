@@ -34,3 +34,13 @@ export async function embedFile({ fileContent, filename, repoName }: EmbedFile) 
 
     return { documentId }
 }
+
+/*  we dont need to send all the files in the embedding pipeline,
+instead we should create a sub-agent that will
+take the whole repo tree structure and it will decide and return the imp file paths */
+
+// obvious skips are: node_modules, dist, lockfiles, staic assests, .agent, .claude, .cursor, .claude_code, like this.
+//  but dont skip .github as ci/cd files can be present there
+
+// get data to create embeddings
+// repo --> all files --> file path --> single file --> content data 
