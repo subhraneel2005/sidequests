@@ -5,7 +5,12 @@ export enum Tools {
     GetGithubDiff = "get_github_diff",
     GenerateReview = "generate_review_report",
     SendTelegram = "send_telegram_message",
+    Grep = "grep_tool"
 }
+
+export const UserInputQuerySchema = z.object({
+    query: z.string()
+})
 
 // embedFile() for embedding a file into vector db
 //  upsertVector() for updating embeddings based on github_diff
@@ -26,4 +31,5 @@ export const AgentInputSchema = z.object({
     issueNumber: z.number().optional(),
 })
 
+export type UserInputQuery = z.infer<typeof UserInputQuerySchema>
 export type AgentInput = z.infer<typeof AgentInputSchema>
