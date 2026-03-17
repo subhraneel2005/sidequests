@@ -20,7 +20,7 @@ export async function writeFileWithContent({ filename, fileContent, folder }: Wr
 
         return { sucess: true, path: filePath }
     } catch (error) {
-        console.error("Error at tool: write_file_with_content: " + error)
+        console.error("Error at tool: write_file: " + error)
         return { success: false, error: String(error) }
     }
 }
