@@ -3,7 +3,7 @@ import path from "node:path"
 import { WriteFileSchema, type WriteFileProps } from "../types/tool-types";
 import { tool } from "ai";
 
-export async function writeFileWithContent({ filename, fileContent, folder }: WriteFileProps) {
+async function writeFileWithContent({ filename, fileContent, folder }: WriteFileProps) {
 
     const basePath = folder ? path.join(process.cwd(), folder) : process.cwd()
 

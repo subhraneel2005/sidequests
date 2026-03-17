@@ -39,6 +39,26 @@ export const ReadFileResultSchema = z.union([
     })
 ])
 
+export const SearchFilesSchema = z.object({
+    folder: z.string().optional(),
+    pattern: z.string().optional()
+})
+
+export const SearchFilesResultSchema = z.union([
+    z.object({
+        success: z.literal(true),
+        files: z
+            .array(z.string())
+            .describe("List of file paths")
+    }),
+    z.object({
+        success: z.literal(false),
+        error: z.string()
+    })
+])
+
 export type WriteFileProps = z.infer<typeof WriteFileSchema>
 export type ReadFileProps = z.infer<typeof ReadFileSchema>
 export type ReadFileResults = z.infer<typeof ReadFileResultSchema>
+export type SearchFiles = z.infer<typeof SearchFilesSchema>
+export type SearchFilesResult = z.infer<typeof SearchFilesResultSchema>

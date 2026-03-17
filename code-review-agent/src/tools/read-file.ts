@@ -3,7 +3,7 @@ import path from "node:path"
 import fs from "node:fs/promises"
 import { tool } from "ai";
 
-export async function readFile({ folder, filename }: ReadFileProps): Promise<ReadFileResults> {
+async function readFile({ folder, filename }: ReadFileProps): Promise<ReadFileResults> {
 
     const root = process.cwd();
     const basePath = folder ? path.join(root, folder) : root;
