@@ -58,29 +58,66 @@ export const SearchFilesResultSchema = z.union([
 ])
 
 export const EditFileInputSchema = z.object({
-    filename: z.string(),
-    folder: z.string().optional(),
-    oldStr: z.string(),
-    newStr: z.string(),
+    filename: z.string()
+        .describe(
+            "Name of the file to edit (e.g. 'index.ts')."
+        ),
+    folder: z.string().optional()
+        .describe(
+            "Optional relative folder path from project root (e.g. 'src/utils'). If omitted, file is assumed to be in root."
+        ),
+    oldStr: z.string()
+        .describe(
+            "Exact or near-exact code snippet currently present in the file that should be replaced. \
+        Must include enough surrounding context (multiple lines if possible) to uniquely identify the target location."
+        ),
+
+    newStr: z.string()
+        .describe(
+            "New code snippet that will replace oldStr. Should be a complete, valid replacement block (not partial)."
+        ),
 })
 
 export const EditFileOutputSchema = z.union([
     z.object({
         success: z.literal(true),
-        path: z.string(),
+
+        path: z.string()
+            .describe(
+                "File path of the file that was successfully modified."
+            ),
+
         summary: z.object({
-            additions: z.string(),
-            deletions: z.string(),
-            additionsCount: z.number(),
+            additions: z.string()
+                .describe(
+                    "Text content that was added to the file (diff-style, may include multiple lines)."
+                ),
+            deletions: z.string()
+                .describe(
+                    "Text content that was removed from the file (diff-style, may include multiple lines)."
+                ),
+            additionsCount: z.number()
+                .describe(
+                    "Number of characters or lines added (depending on implementation). Indicates size of change."
+                ),
             deletionsCount: z.number()
+                .describe(
+                    "Number of characters or lines removed. Indicates size of change."
+                ),
         })
+            .describe(
+                "Summary of changes applied to the file. Useful for understanding impact without reading full diff."
+            ),
     }),
+
     z.object({
         success: z.literal(false),
-        error: z.string()
-    })
-])
 
+        error: z.string().describe(
+            "Error message explaining why the edit failed (e.g. oldStr not found, invalid path, permission issue)."
+        ),
+    }),
+])
 
 
 export type WriteFileProps = z.infer<typeof WriteFileSchema>

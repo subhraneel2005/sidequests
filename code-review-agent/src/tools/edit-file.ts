@@ -2,7 +2,8 @@ import fs from "node:fs/promises"
 import { diffChars, diffLines } from "diff"
 import path from "path"
 import "colors"
-import type { EditFileInput, EditFileOutput } from "../types/tool-types"
+import { EditFileInputSchema, EditFileOutputSchema, type EditFileInput, type EditFileOutput } from "../types/tool-types"
+import { tool } from "ai"
 
 const num = Math.floor(Math.random() * 0xffffff)
 const hex = num.toString(16)
@@ -64,6 +65,13 @@ async function editFile({ filename, folder, newStr, oldStr }: EditFileInput): Pr
         }
     }
 }
+
+export const editFileTool = tool({
+    description: "Replace a specific code block in a file by matching oldStr and substituting it with newStr. Requires precise context to ensure a unique and safe edit.",
+    inputSchema: EditFileInputSchema,
+    outputSchema: EditFileOutputSchema,
+    execute: editFile
+})
 
 // await editFile({
 //     filename: "index.ts",
