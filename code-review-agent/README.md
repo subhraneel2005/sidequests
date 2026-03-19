@@ -1,3 +1,5 @@
+## mini claude code
+
 ## what this agent will do:
 
 <img width="785" height="407" alt="image" src="https://github.com/user-attachments/assets/c90b40fe-38a6-4ac8-ad33-44af6f2b9b3e" />
