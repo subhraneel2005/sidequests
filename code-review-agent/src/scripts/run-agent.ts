@@ -5,8 +5,17 @@ import { LoadAPIKeyError, type ErrorHandler } from "ai";
 import { codingAgent } from "..";
 import type { UserInputQuery } from "../types/agent-types";
 import readline from "readline"
+import type { EditFileInput, EditFileOutput } from "../types/tool-types";
+import { askUser } from "../utils/ask-user";
+import { editFile } from "../tools/edit-file";
+import { printDiff } from "../utils/print-diff";
+
+type EditFileResultWithInput = EditFileOutput & { _input: EditFileInput }
 
 async function runAgent({ query }: UserInputQuery) {
+
+    const editToolResults: EditFileResultWithInput[] = []
+
 
     try {
         const result = await codingAgent.stream({
@@ -21,13 +30,34 @@ async function runAgent({ query }: UserInputQuery) {
                     process.stdout.write(chunk.text);
                     break;
 
-                case "error":
-                    handleError(chunk.error)
-                    return;
+                case "tool-result": {
+
+                    if (chunk.toolName === "edit_file") {
+                        editToolResults.push({
+                            ...chunk.output as EditFileOutput,
+                            _input: chunk.input as EditFileInput
+                        })
+                    }
+
+                }
             }
         }
 
         process.stdout.write("\n")
+
+        for (const output of editToolResults) {
+            if (output.success && output.needsApproval) {
+                printDiff(output.preview!)
+                const answer = await askUser("Apply changes? (y/n): ")
+                if (answer === "y" || answer === "yy") {
+                    await editFile({ ...output._input, isApproved: true })  // use stored input
+                    console.log("✅ Changes applied")
+                } else {
+                    console.log("❌ Changes cancelled")
+                }
+            }
+        }
+
     } catch (error) {
         handleError(error);
     }

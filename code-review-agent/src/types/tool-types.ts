@@ -76,6 +76,8 @@ export const EditFileInputSchema = z.object({
         .describe(
             "New code snippet that will replace oldStr. Should be a complete, valid replacement block (not partial)."
         ),
+    isApproved: z.boolean().optional()
+        .describe("Needs approval before writing new changes")
 })
 
 export const EditFileOutputSchema = z.union([
@@ -86,6 +88,12 @@ export const EditFileOutputSchema = z.union([
             .describe(
                 "File path of the file that was successfully modified."
             ),
+
+        preview: z.object({
+            before: z.string(),
+            after: z.string(),
+            diff: z.string()
+        }).optional(),
 
         summary: z.object({
             additions: z.string()
@@ -108,6 +116,9 @@ export const EditFileOutputSchema = z.union([
             .describe(
                 "Summary of changes applied to the file. Useful for understanding impact without reading full diff."
             ),
+
+        needsApproval: z.boolean().optional()
+            .describe("Needs human approval to be true for the agent to write the changes in the file")
     }),
 
     z.object({
