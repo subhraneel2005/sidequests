@@ -130,6 +130,62 @@ export const EditFileOutputSchema = z.union([
     }),
 ])
 
+export const LsInputSchema = z.object({
+    propPath: z.string(),
+    all: z.boolean()
+})
+
+export const LsOutputSchema = z.union([
+    z.object({
+        success: z.literal(true),
+        files: z.string().describe("All the files that are got by the ls tool joined in a single string with new lines")
+    }),
+
+    z.object({
+        success: z.literal(false),
+        error: z.string().describe(
+            "Error message explaining why the ls tool failed."
+        ),
+    }),
+])
+
+export const PwdInputSchema = z.object({
+    filename: z.string().optional().describe("Pass the filename to this if user tells about filename.")
+})
+
+export const PwdOutputSchema = z.union([
+    z.object({
+        success: z.literal(true),
+        pwd: z.string().describe("The present working directory.")
+    }),
+
+    z.object({
+        success: z.literal(false),
+        error: z.string().describe(
+            "Error message explaining why the ls tool failed."
+        ),
+    }),
+])
+
+export const GrepInputSchema = z.object({
+    pattern: z.string(),
+    filename: z.string()
+  });
+  
+  export const GrepOutputSchema = z.union([
+    z.object({
+        success: z.literal(true),
+        matches: z.array(z.string()).describe("The matches that is got from the pattern search using grep.")
+    }),
+
+    z.object({
+        success: z.literal(false),
+        error: z.string().describe(
+            "Error message explaining why the grep tool failed."
+        ),
+    }),
+])
+
 
 export type WriteFileProps = z.infer<typeof WriteFileSchema>
 export type ReadFileProps = z.infer<typeof ReadFileSchema>
@@ -138,3 +194,9 @@ export type SearchFiles = z.infer<typeof SearchFilesSchema>
 export type SearchFilesResult = z.infer<typeof SearchFilesResultSchema>
 export type EditFileInput = z.infer<typeof EditFileInputSchema>
 export type EditFileOutput = z.infer<typeof EditFileOutputSchema>
+export type LsInput = z.infer<typeof LsInputSchema>
+export type LsOutput = z.infer<typeof LsOutputSchema>
+export type PwdInput = z.infer<typeof PwdInputSchema>
+export type PwdOutput = z.infer<typeof PwdOutputSchema>
+export type GrepInput = z.infer<typeof GrepInputSchema>;
+export type GrepOutput = z.infer<typeof GrepOutputSchema>;

@@ -5,7 +5,8 @@
   "private": true,
   "scripts": {
     "agent": "bun src/scripts/run-agent.ts",
-    "ffm": "bun src/utils/fetch-free-models.ts"
+    "ffm": "bun src/utils/fetch-free-models.ts",
+    "test": "bun test"
   },
   "devDependencies": {
     "@types/bun": "latest"
