@@ -242,7 +242,16 @@ export const GitToolsInputSchema = z.object({
         pr merge
         Merge a pull request into the base branch after review.
     `),
-    commitMessage: z.string().optional().describe("The commit message when the command is git commit")
+    commitMessage: z.string().optional().describe("The commit message when the command is git commit"),
+    title: z
+    .string()
+    .optional()
+    .describe("Title for GitHub issue or pull request"),
+
+  body: z
+    .string()
+    .optional()
+    .describe("Body/description for GitHub issue or pull request"),
 })
 
 

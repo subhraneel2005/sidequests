@@ -6,11 +6,11 @@ import { tool } from "ai";
 
 const execAsync = promisify(exec)
 
-async function gitToolFunc({ command, commitMessage }: GitCommandInput) {
+async function gitToolFunc({ command, commitMessage, title, body }: GitCommandInput) {
   let cmd = "";
   switch (command) {
     case "commit":
-        cmd = `git add .\ngit commit -m "${commitMessage}"`
+        cmd = `git add . && git commit -m "${commitMessage}"`
         break
     case "push":
       cmd = "git push";
@@ -19,10 +19,10 @@ async function gitToolFunc({ command, commitMessage }: GitCommandInput) {
       cmd = "git pull";
       break;
     case "issue create":
-      cmd = "gh issue create";
-      break;
+      cmd = `gh issue create --title "${title}" --body "${body}"`
+      break
     case "issue edit":
-      cmd = "gh issue edit";
+      cmd = `gh issue edit --title "${title}" --body "${body}"`
       break;
     case "pr checkout":
       cmd = "gh pr checkout";
@@ -31,16 +31,16 @@ async function gitToolFunc({ command, commitMessage }: GitCommandInput) {
       cmd = "gh pr close";
       break;
     case "pr comment":
-      cmd = "gh pr comment";
+      cmd = `gh pr comment --body "${body}"`;
       break;
     case "pr create":
-      cmd = "gh pr create";
+      cmd = `gh pr create --title "${title}" --body "${body}"`
       break;
     case "pr diff":
       cmd = "gh pr diff";
       break;
     case "pr edit":
-      cmd = "gh pr edit";
+      cmd = `gh pr edit --title "${title}" --body "${body}"`;
       break;
     case "pr list":
       cmd = "gh pr list";
