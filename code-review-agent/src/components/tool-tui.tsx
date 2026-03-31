@@ -26,7 +26,6 @@ export default function ToolExecution({ name, args, status, output }: Props) {
 			paddingX={1}
 			borderStyle="round"
 			borderColor="gray"
-			backgroundColor="black"
 		>
 			<Box>
 				<Text color={color}>{icon}</Text>

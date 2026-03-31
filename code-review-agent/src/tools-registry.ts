@@ -7,6 +7,7 @@ import { lsTool } from "./tools/ls";
 import { pwdTool } from "./tools/pwd";
 import { grepTool } from "./tools/grep";
 import { gitTool } from "./tools/git-tools";
+import { plannerSubagentTool } from "./sub-agents/planner/planner-agent";
 
 export const tools = {
     write_file: writeFileTool,
@@ -18,5 +19,8 @@ export const tools = {
     pwd: pwdTool,
     grep: grepTool,
 
-    git_tool: gitTool
+    git_tool: gitTool,
+    
+    // sub-agents
+    plannerSubagentTool
 } satisfies ToolSet

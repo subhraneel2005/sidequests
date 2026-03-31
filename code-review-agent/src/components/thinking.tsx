@@ -38,9 +38,3 @@ export default function Thinking({thinking}: Props) {
 		</Box>
 	);
 }
-
-render(<Thinking thinking={[
-    "Analyzing repository structure...",
-    "Identifying relevant files...",
-    "Planning code modifications..."
-]}/>)

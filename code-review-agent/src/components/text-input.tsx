@@ -2,27 +2,21 @@ import React, { useState } from "react";
 import { render, Box, Text } from "ink";
 import TextInput from "ink-text-input";
 
-const PromptInput = () => {
+export const PromptInput = ({
+  onSubmit
+}: {
+  onSubmit: (value: string) => void
+}) => {
   const [value, setValue] = useState("");
-  const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = (val: string) => {
-    setSubmitted(true);
-    console.log("User prompt:", val);
+    onSubmit(val);
   };
-
-  if (submitted) {
-    return (
-      <Box>
-        <Text>You entered: {value}</Text>
-      </Box>
-    );
-  }
 
   return (
     <Box flexDirection="column">
       <Text>Enter prompt:</Text>
-      <Box borderStyle="round" borderColor="white" backgroundColor={"black"} paddingX={1}>
+      <Box borderStyle="round" borderColor="whiteBright" borderDimColor>
         <TextInput
           value={value}
           onChange={setValue}
@@ -33,5 +27,3 @@ const PromptInput = () => {
     </Box>
   );
 };
-
-render(<PromptInput />);

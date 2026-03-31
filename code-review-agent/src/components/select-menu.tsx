@@ -3,7 +3,6 @@ import { Box, render, Text } from "ink";
 import SelectInput from "ink-select-input";
 
 import { OPENROUTER_FREE_MODELS } from "../../free-models";
-import { openrouter } from "../config/openrouter";
 
 type Item = {
 	label: string;
@@ -28,20 +27,17 @@ export default function ModelSelect() {
 				flexDirection="column"
 				borderStyle="round"
 				borderColor="green"
-				paddingX={2}
-				paddingY={1}
+				paddingX={1}
 			>
 				<Text color="green">✓ Model Selected</Text>
 
-				<Box marginTop={1}>
-					<Text dimColor>Model:</Text>
-					<Text> {selectedModel}</Text>
-				</Box>
+				<Text color="white">
+					<Text dimColor>model:</Text> {selectedModel}
+				</Text>
 
-				<Box marginTop={1}>
-					<Text dimColor>Client:</Text>
-					<Text> openrouter.chat()</Text>
-				</Box>
+				<Text color="white">
+					<Text dimColor>client:</Text> openrouter.chat()
+				</Text>
 			</Box>
 		);
 	}
@@ -49,19 +45,28 @@ export default function ModelSelect() {
 	return (
 		<Box flexDirection="column">
 			<Box marginBottom={1}>
-				<Text bold>Select a Model</Text>
+				<Text bold color="white">Select Model</Text>
 				<Text dimColor> (↑ ↓ navigate • enter select)</Text>
 			</Box>
 
-			<Box borderStyle="round" paddingX={1}>
+			<Box
+				borderStyle="round"
+				borderColor="gray"
+				height={8}
+				paddingX={1}
+				flexDirection="column"
+			>
 				<SelectInput
 					items={items}
 					onSelect={handleSelect}
+					limit={6}
 					indicatorComponent={({ isSelected }) => (
-						<Text>{isSelected ? "❯" : " "}</Text>
+						<Text color={isSelected ? "cyan" : "white"}>
+							{isSelected ? "❯" : " "}
+						</Text>
 					)}
 					itemComponent={({ label, isSelected }) => (
-						<Text inverse={isSelected}>
+						<Text color="white" inverse={isSelected}>
 							{label}
 						</Text>
 					)}

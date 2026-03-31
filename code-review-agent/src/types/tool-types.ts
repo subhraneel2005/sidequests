@@ -254,6 +254,26 @@ export const GitToolsInputSchema = z.object({
     .describe("Body/description for GitHub issue or pull request"),
 })
 
+const TODO_STATUS = ["completed", "not completed", "ongoing"] as const
+
+export const SingleTodoSchema = z.object({
+    id: z.string().describe("Unique id of the todo"),
+    todo: z.string().describe("Define the task here"),
+    status: z.enum(TODO_STATUS).default("not completed"),
+    priority: z.number().min(1).max(5).default(3).describe("1 = Highest Priority")
+})
+
+export const TodosSchema = z.object({
+    todos: z.array(SingleTodoSchema),
+    areAllCompleted: z.boolean().default(false).optional()
+})
+
+export const UpdateTodoStatusSchema = z.object({
+    id: z.string(),
+    status: z.enum(TODO_STATUS),
+    todos: TodosSchema
+})
+
 
 export type WriteFileProps = z.infer<typeof WriteFileSchema>
 export type ReadFileProps = z.infer<typeof ReadFileSchema>
@@ -269,3 +289,6 @@ export type PwdOutput = z.infer<typeof PwdOutputSchema>
 export type GrepInput = z.infer<typeof GrepInputSchema>;
 export type GrepOutput = z.infer<typeof GrepOutputSchema>;
 export type GitCommandInput = z.infer<typeof GitToolsInputSchema>
+export type Todos = z.infer<typeof TodosSchema>
+export type SingleTodo = z.infer<typeof SingleTodoSchema>
+export type UpdateTodoStatus = z.infer<typeof UpdateTodoStatusSchema>

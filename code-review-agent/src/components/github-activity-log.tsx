@@ -36,7 +36,6 @@ export default function GithubTool({
 			paddingY={0}
 			borderStyle="round"
 			borderColor="gray"
-			backgroundColor="black"
 		>
 			<Box>
 				<Text color={iconColor}>{icon}</Text>
