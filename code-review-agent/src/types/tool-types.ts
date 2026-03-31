@@ -186,6 +186,65 @@ export const GrepInputSchema = z.object({
     }),
 ])
 
+export const GIT_COMMANDS = ["push", "pull", "commit", "issue create", "issue edit", "pr create", "pr status", "pr list", "pr checkout", "pr diff", "pr edit", "pr comment", "pr close", "pr merge"] as const
+
+export const GitToolsInputSchema = z.object({
+    command: z.enum(GIT_COMMANDS).describe(`
+        The Git/GitHub operation the agent wants to perform.  
+        Use this tool whenever the task involves interacting with the repository history, remote origin, or GitHub pull requests/issues.
+        
+        Available commands:
+
+        commit
+        Add (Stage) and Commit the latest changes
+        
+        push
+        Push the current local branch commits to the remote repository.  
+        Use after creating commits that should be uploaded to GitHub.
+        
+        pull
+        Fetch and merge changes from the remote repository into the current branch.  
+        Use when the agent needs the latest updates from collaborators.
+        
+        issue create
+        Create a new GitHub issue in the repository.  
+        Use when the user wants to track a bug, feature request, or task.
+        
+        issue edit
+        Edit an existing GitHub issue (title, description, etc).
+        
+        pr create
+        Create a new pull request from the current branch to the base branch.  
+        Use after committing and pushing changes that should be reviewed.
+        
+        pr status
+        Show the current status of pull requests related to the branch.  
+        Useful for checking whether a PR already exists.
+        
+        pr list
+        List open pull requests in the repository.
+        
+        pr checkout
+        Checkout a pull request locally so the agent can inspect or modify the code.
+        
+        pr diff
+        Show the code differences introduced by a pull request.
+        
+        pr edit
+        Edit an existing pull request (title or description).
+        
+        pr comment
+        Add a comment to a pull request discussion.
+        
+        pr close
+        Close an open pull request without merging.
+        
+        pr merge
+        Merge a pull request into the base branch after review.
+    `),
+    commitMessage: z.string().optional().describe("The commit message when the command is git commit")
+})
+
 
 export type WriteFileProps = z.infer<typeof WriteFileSchema>
 export type ReadFileProps = z.infer<typeof ReadFileSchema>
@@ -200,3 +259,4 @@ export type PwdInput = z.infer<typeof PwdInputSchema>
 export type PwdOutput = z.infer<typeof PwdOutputSchema>
 export type GrepInput = z.infer<typeof GrepInputSchema>;
 export type GrepOutput = z.infer<typeof GrepOutputSchema>;
+export type GitCommandInput = z.infer<typeof GitToolsInputSchema>

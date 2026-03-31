@@ -6,6 +6,7 @@ import { editFileTool } from "./tools/edit-file";
 import { lsTool } from "./tools/ls";
 import { pwdTool } from "./tools/pwd";
 import { grepTool } from "./tools/grep";
+import { gitTool } from "./tools/git-tools";
 
 export const tools = {
     write_file: writeFileTool,
@@ -15,5 +16,7 @@ export const tools = {
 
     ls: lsTool,
     pwd: pwdTool,
-    grep: grepTool
+    grep: grepTool,
+
+    git_tool: gitTool
 } satisfies ToolSet
