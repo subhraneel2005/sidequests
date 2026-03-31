@@ -37,8 +37,14 @@ export default function TodoList() {
 	});
 
 	return (
-		<Box flexDirection="column">
-			<Text bold>Agent Tasks</Text>
+		<Box
+			flexDirection="column"
+			paddingX={1}
+			borderStyle="round"
+			borderColor="gray"
+			backgroundColor="black"
+		>
+			<Text bold color="white">Agent Tasks</Text>
 
 			<Box flexDirection="column" marginTop={1}>
 				{todos.map((todo, i) => {
@@ -50,13 +56,14 @@ export default function TodoList() {
 								{selected ? "❯ " : "  "}
 							</Text>
 
-							<Text dimColor={!todo.done}>
+							<Text color={todo.done ? "green" : "white"}>
 								{todo.done ? "✓" : "○"}
 							</Text>
 
 							<Text> </Text>
 
 							<Text
+								color="white"
 								strikethrough={todo.done}
 								dimColor={todo.done}
 							>
@@ -76,4 +83,4 @@ export default function TodoList() {
 	);
 }
 
-render(<TodoList/>)
+render(<TodoList />);

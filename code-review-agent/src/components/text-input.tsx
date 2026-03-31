@@ -22,7 +22,7 @@ const PromptInput = () => {
   return (
     <Box flexDirection="column">
       <Text>Enter prompt:</Text>
-      <Box borderStyle="round" borderColor="cyan" paddingX={1}>
+      <Box borderStyle="round" borderColor="white" backgroundColor={"black"} paddingX={1}>
         <TextInput
           value={value}
           onChange={setValue}

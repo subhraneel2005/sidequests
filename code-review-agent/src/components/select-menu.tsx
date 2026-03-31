@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Box, render, Text } from "ink";
 import SelectInput from "ink-select-input";
 
-
 import { OPENROUTER_FREE_MODELS } from "../../free-models";
 import { openrouter } from "../config/openrouter";
 
@@ -36,7 +35,7 @@ export default function ModelSelect() {
 
 				<Box marginTop={1}>
 					<Text dimColor>Model:</Text>
-					<Text color="cyan"> {selectedModel}</Text>
+					<Text> {selectedModel}</Text>
 				</Box>
 
 				<Box marginTop={1}>
@@ -50,28 +49,19 @@ export default function ModelSelect() {
 	return (
 		<Box flexDirection="column">
 			<Box marginBottom={1}>
-				<Text bold color="cyan">
-				 Select a Model
-				</Text>
-				<Text dimColor> (↑ ↓ to navigate, enter to select)</Text>
+				<Text bold>Select a Model</Text>
+				<Text dimColor> (↑ ↓ navigate • enter select)</Text>
 			</Box>
 
-			<Box
-				borderStyle="round"
-				borderColor="cyan"
-				paddingX={1}
-				paddingY={0}
-			>
+			<Box borderStyle="round" paddingX={1}>
 				<SelectInput
 					items={items}
 					onSelect={handleSelect}
 					indicatorComponent={({ isSelected }) => (
-						<Text color={isSelected ? "cyan" : "gray"}>
-							{isSelected ? "❯" : " "}
-						</Text>
+						<Text>{isSelected ? "❯" : " "}</Text>
 					)}
 					itemComponent={({ label, isSelected }) => (
-						<Text color={isSelected ? "cyan" : undefined}>
+						<Text inverse={isSelected}>
 							{label}
 						</Text>
 					)}
@@ -81,4 +71,4 @@ export default function ModelSelect() {
 	);
 }
 
-render(<ModelSelect />)
+render(<ModelSelect />);
