@@ -29,6 +29,7 @@ export default function RunAgent() {
   const [answer, setAnswer] = useState("");
   const [isAnswer, setIsAnswer] = useState(false);
   const [history, setHistory] = useState<string[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   async function runAgent({ query }: UserInputQuery) {
     const editToolResults: EditFileResultWithInput[] = [];
@@ -41,6 +42,7 @@ export default function RunAgent() {
       for await (const chunk of result.fullStream) {
         switch (chunk.type) {
           case "text-delta":
+            if (isLoading) setIsLoading(false);
             if (chunk.text.includes("ANSWER:")) {
               setIsAnswer(true);
 
@@ -109,10 +111,11 @@ export default function RunAgent() {
     setHistory((prev) => [...prev, val]);
     setQuery(val);
     setIsRunning(true);
+    setIsLoading(true);
 
     await runAgent({ query: val });
 
-    setIsRunning(false);
+    // setIsRunning(false);
   };
 
   return (

@@ -7,20 +7,33 @@ import { lsTool } from "./tools/ls";
 import { pwdTool } from "./tools/pwd";
 import { grepTool } from "./tools/grep";
 import { gitTool } from "./tools/git-tools";
-import { plannerSubagentTool } from "./sub-agents/planner/planner-agent";
+import { generatePlanAndTodosTool } from "./sub-agents/planner/planner-agent";
+import {
+  checkIfAllTodosAreCompletedTool,
+  createAllTodosTool,
+  createTodoTool,
+  getNextPendingTodoTool,
+  updateTodoStatusTool,
+} from "./tools/planner/todo-actions";
 
 export const tools = {
-    write_file: writeFileTool,
-    read_file: readFileTool,
-    search_files: searchFilesTool,
-    edit_file: editFileTool,
+  write_file: writeFileTool,
+  read_file: readFileTool,
+  search_files: searchFilesTool,
+  edit_file: editFileTool,
 
-    ls: lsTool,
-    pwd: pwdTool,
-    grep: grepTool,
+  ls: lsTool,
+  pwd: pwdTool,
+  grep: grepTool,
 
-    git_tool: gitTool,
-    
-    // sub-agents
-    plannerSubagentTool
-} satisfies ToolSet
+  git_tool: gitTool,
+
+  // sub-agents
+//   generate_plan_and_todos: generatePlanAndTodosTool,
+
+  createTodoTool,
+  createAllTodosTool,
+  updateTodoStatusTool,
+  getNextPendingTodoTool,
+  checkIfAllTodosAreCompletedTool,
+} satisfies ToolSet;

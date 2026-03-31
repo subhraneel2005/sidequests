@@ -3,13 +3,15 @@ import { instructions } from "./instructions";
 import { checkIfAllTodosAreCompletedTool, createAllTodosTool, createTodoTool, getNextPendingTodoTool, updateTodoStatusTool } from "../../tools/planner/todo-actions";
 import z from "zod";
 import { selectModel } from "../../utils/select-model";
+import { google } from "@ai-sdk/google";
+import { openrouter } from "@openrouter/ai-sdk-provider";
 
 
-const { chatModel } = await selectModel();
+// const { chatModel } = await selectModel();
 
 
 const plannerSubagent = new ToolLoopAgent({
-    model: chatModel,
+    model: openrouter.chat("openrouter/free"),
     instructions,
     tools: {
         createTodoTool,
@@ -20,7 +22,7 @@ const plannerSubagent = new ToolLoopAgent({
     }
 })
 
-export const plannerSubagentTool = tool({
+export const generatePlanAndTodosTool = tool({
     description: "generate detailed plan for what user wants and generate atomic todos follwoing the provided schema",
     inputSchema: z.object({
         userQuery: z.string().describe("user query that explains what user wants")

@@ -2,21 +2,39 @@ import { ToolLoopAgent } from "ai";
 import { tools } from "./tools-registry";
 import { hasReviewComment } from "./utils/agent-utils";
 import { selectModel } from "./utils/select-model";
+import { google } from '@ai-sdk/google';
+import { openrouter } from "@openrouter/ai-sdk-provider";
 
-const { chatModel, modelId } = await selectModel();
 
-console.debug("using model:", modelId);
+// const { chatModel, modelId } = await selectModel();
+
+// console.debug("using model:", modelId);
 
 export const codingAgent = new ToolLoopAgent({
-  model: chatModel,
+  model: openrouter.chat("openrouter/free"),
   instructions: `
-    You're a helpful coding agent.
-    You have access to tools: write_file, read_file, edit_file, ls_tool, pwd_tool, search_files.
-    Use these tools whenever you need to interact with files or the filesystem.
-    Always call a tool if it will help complete the task. 
-    Do not answer without using the tools when appropriate.
-    Always finish your reasoning with a line starting with "ANSWER:".
-    Do not stop until you write "ANSWER:".`,
+    You're a coding agent.
+
+If the user asks for:
+- a plan
+- steps
+- todos
+- architecture
+- implementation strategy
+
+You MUST call plannerSubagentTool.
+
+The plannerSubagentTool is responsible for generating todos using:
+createTodoTool
+createAllTodosTool
+updateTodoStatusTool
+
+Never generate a plan yourself if plannerSubagentTool can do it.
+
+After the planner returns todos, continue execution if necessary.
+
+Always finish reasoning with:
+ANSWER:`,
   tools,
   onStepFinish({ stepNumber, usage, toolCalls, finishReason }) {
     console.log(`\n--- Step ${stepNumber} ---`);
