@@ -18,16 +18,15 @@ import React, { useState } from "react";
 import { PromptInput } from "../components/text-input";
 import Thinking from "../components/thinking";
 import TodoList from "../components/todo-list";
+import Blob from "../components/blob";
 
 type EditFileResultWithInput = EditFileOutput & { _input: EditFileInput };
 
 export default function RunAgent() {
-  const [thinking, setThinking] = useState("");
   const [query, setQuery] = useState("");
   const [isRunning, setIsRunning] = useState(false);
   const [todos, setTodos] = useState<SingleTodo[]>([]);
   const [answer, setAnswer] = useState("");
-  const [isAnswer, setIsAnswer] = useState(false);
   const [history, setHistory] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -42,20 +41,7 @@ export default function RunAgent() {
       for await (const chunk of result.fullStream) {
         switch (chunk.type) {
           case "text-delta":
-            if (isLoading) setIsLoading(false);
-            if (chunk.text.includes("ANSWER:")) {
-              setIsAnswer(true);
-
-              const clean = chunk.text.replace("ANSWER:", "");
-              setAnswer((prev) => prev + clean);
-              return;
-            }
-            if (isAnswer) {
-              setAnswer((prev) => prev + chunk.text);
-            } else {
-              setThinking((prev) => prev + chunk.text);
-            }
-
+            setAnswer((prev) => prev + chunk.text); // append text to state
             break;
 
           case "tool-result": {
@@ -99,13 +85,13 @@ export default function RunAgent() {
       }
     } catch (error) {
       handleError(error);
+    } finally {
+      setIsRunning(false); 
     }
   }
 
   const handlePromptSubmit = async (val: string) => {
-    setThinking("");
     setAnswer("");
-    setIsAnswer(false);
     setTodos([]);
 
     setHistory((prev) => [...prev, val]);
@@ -128,18 +114,15 @@ export default function RunAgent() {
       ))}
       {todos.length > 0 && <TodoList todos={todos} />}
 
-      {thinking.length > 0 && (
-        <Text dimColor wrap="wrap">
-          {thinking}
-        </Text>
-      )}
-
       {answer && (
         <Box marginTop={1}>
           <Text color="green">{answer}</Text>
         </Box>
       )}
-      {!isRunning && <PromptInput onSubmit={handlePromptSubmit} />}
+      {!isRunning && <Box flexDirection="column">
+        <Blob/>
+        <PromptInput onSubmit={handlePromptSubmit} />
+        </Box>}
     </Box>
   );
 }

@@ -15,7 +15,6 @@ export const PromptInput = ({
 
   return (
     <Box flexDirection="column">
-      <Text>Enter prompt:</Text>
       <Box borderStyle="round" borderColor="whiteBright" borderDimColor>
         <TextInput
           value={value}
