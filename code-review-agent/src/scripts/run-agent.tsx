@@ -19,6 +19,7 @@ import { PromptInput } from "../components/text-input";
 import Thinking from "../components/thinking";
 import TodoList from "../components/todo-list";
 import Blob from "../components/blob";
+import { ThinkingDots } from "../components/thinking-loader";
 
 type EditFileResultWithInput = EditFileOutput & { _input: EditFileInput };
 
@@ -86,7 +87,7 @@ export default function RunAgent() {
     } catch (error) {
       handleError(error);
     } finally {
-      setIsRunning(false); 
+      setIsRunning(false);
     }
   }
 
@@ -119,10 +120,13 @@ export default function RunAgent() {
           <Text color="green">{answer}</Text>
         </Box>
       )}
-      {!isRunning && <Box flexDirection="column">
-        <Blob/>
-        <PromptInput onSubmit={handlePromptSubmit} />
-        </Box>}
+      {!isRunning && (
+        <Box flexDirection="column">
+          <Blob />
+          <PromptInput onSubmit={handlePromptSubmit} />
+        </Box>
+      )}
+      {isRunning && <ThinkingDots />}
     </Box>
   );
 }
