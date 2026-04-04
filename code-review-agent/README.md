@@ -1,12 +1,23 @@
 
-# AI Terminal Coding Agent (My Own Claude Code)
-<p align="center">
-  <a href="https://github.com/subhraneel2005/sidequests"><img src="https://img.shields.io/github/stars/subhraneel2005/sidequests?style=flat&color=FFD700" alt="stars"></a>
-  <a href="https://github.com/subhraneel2005/sidequests/issues"><img src="https://img.shields.io/github/issues/subhraneel2005/sidequests" alt="issues"></a>
+<img width="2184" height="686" alt="banner" src="https://github.com/user-attachments/assets/35519a96-861b-4107-b7ce-7ea48a185014" />
+
+<div align="center">
+
+# AI Terminal Coding Agent (Building my Own Claude Code)
+
+<p>
+  <a href="https://github.com/subhraneel2005/sidequests">
+    <img src="https://img.shields.io/github/stars/subhraneel2005/sidequests?style=flat&color=FFD700" alt="stars">
+  </a>
+  <a href="https://github.com/subhraneel2005/sidequests/issues">
+    <img src="https://img.shields.io/github/issues/subhraneel2005/sidequests" alt="issues">
+  </a>
   <img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=typescript&logoColor=white" alt="TypeScript" />
   <img src="https://img.shields.io/badge/Node.js-339933?style=flat&logo=node.js&logoColor=white" alt="Node.js" />
   <img src="https://img.shields.io/badge/gemini2.5-flash-4285F4?style=flat&logo=google&logoColor=white" alt="Google Gemini" />
 </p>
+
+</div>
 
 A CLI-based AI coding companion im building from scratch while reverse engineering claude-code/opencode/codex.
 
