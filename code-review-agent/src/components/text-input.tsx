@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { render, Box, Text } from "ink";
+import { Box } from "ink";
 import TextInput from "ink-text-input";
 
 export const PromptInput = ({
@@ -9,18 +9,31 @@ export const PromptInput = ({
 }) => {
   const [value, setValue] = useState("");
 
+  // Function to convert paragraphs/newlines into a single line
+  const handleInputChange = (val: string) => {
+    const singleLineText = val.replace(/\r?\n|\r/g, " ");
+    setValue(singleLineText);
+  };
+
   const handleSubmit = (val: string) => {
-    onSubmit(val);
+    onSubmit(val.trim());
+    setValue("");
   };
 
   return (
-    <Box flexDirection="column">
-      <Box borderStyle="round" borderColor="whiteBright" borderDimColor>
+    <Box flexDirection="column" width="100%">
+      <Box 
+        borderStyle="round" 
+        borderColor="whiteBright" 
+        borderDimColor
+        paddingX={1}
+        width="100%"
+      >
         <TextInput
           value={value}
-          onChange={setValue}
+          onChange={handleInputChange}
           onSubmit={handleSubmit}
-          placeholder="Type your prompt..."
+          placeholder="Type or paste your prompt..."
         />
       </Box>
     </Box>

@@ -1,23 +1,82 @@
-## mini claude code
 
-## what this agent will do:
+# AI Terminal Coding Agent (My Own Claude Code)
+<p align="center">
+  <a href="https://github.com/subhraneel2005/sidequests"><img src="https://img.shields.io/github/stars/subhraneel2005/sidequests?style=flat&color=FFD700" alt="stars"></a>
+  <a href="https://github.com/subhraneel2005/sidequests/issues"><img src="https://img.shields.io/github/issues/subhraneel2005/sidequests" alt="issues"></a>
+  <img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=typescript&logoColor=white" alt="TypeScript" />
+  <img src="https://img.shields.io/badge/Node.js-339933?style=flat&logo=node.js&logoColor=white" alt="Node.js" />
+  <img src="https://img.shields.io/badge/gemini2.5-flash-4285F4?style=flat&logo=google&logoColor=white" alt="Google Gemini" />
+</p>
 
-<img width="785" height="407" alt="image" src="https://github.com/user-attachments/assets/c90b40fe-38a6-4ac8-ad33-44af6f2b9b3e" />
+A CLI-based AI coding companion im building from scratch while reverse engineering claude-code/opencode/codex.
 
-## codebase indexing process:
+---
 
-<img width="867" height="643" alt="image" src="https://github.com/user-attachments/assets/0b97d2e4-f4c7-42a7-b6b4-4d62903f3908" />
+## Features
 
-To install dependencies:
+### Core Architecture
 
-```bash
-bun install
-```
+| Feature | Description |
+|---------|-------------|
+| Tool-Calling Architecture | Dynamic filesystem and bash tool invocation for autonomous code navigation |
+| Core Agent Loop | Streamed responses, multi-step reasoning, and token usage tracking |
+| Human-in-the-Loop Approval | Diff display before applying edits to prevent destructive actions |
+| Path Traversal Protection | Ensures agent cannot operate outside the project root directory |
 
-To run:
+---
 
-```bash
-bun run index.ts
-```
+### Git Tools
 
-This project was created using `bun init` in bun v1.3.9. [Bun](https://bun.com) is a fast all-in-one JavaScript runtime.
+| Command | Action |
+|---------|--------|
+| commit | Stage and commit changes with message |
+| push | Push to remote |
+| pull | Pull from remote |
+| issue create | Create new issue |
+| issue edit | Edit existing issue |
+| pr checkout | Checkout PR branch |
+| pr close | Close PR |
+| pr comment | Comment on PR |
+| pr create | Create new PR |
+| pr diff | Show PR diff |
+| pr edit | Edit PR |
+| pr list | List PRs |
+| pr merge | Merge PR |
+| pr status | Show PR status |
+
+---
+
+### Filesystem Tools
+
+- Read - Read file contents
+- Search - Search files by pattern
+- Write - Write new files
+- Edit - Edit existing files with typed I/O, diff based editing and safe failure handling
+
+### Bash Tools
+
+- ls - List directory contents
+- pwd - Print working directory
+- grep - Search file contents
+
+---
+
+### Planner Sub-Agent
+
+| Tool | Description |
+|------|-------------|
+| createTodoTool | Create new todo |
+| createAllTodosTool | Create multiple todos |
+| updateTodoStatusTool | Update todo status |
+| getNextPendingTodoTool | Get next pending todo |
+| checkIfAllTodosAreCompletedTool | Check if all todos completed |
+
+---
+
+## Upcoming Features
+
+- Memory for better context
+- Token usage screen
+- Run/build/execute .py/.js/.ts code
+- Voice mode (maybe)
+- Task completion notifier (maybe)

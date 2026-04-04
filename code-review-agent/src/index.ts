@@ -12,8 +12,22 @@ import { openrouter } from "@openrouter/ai-sdk-provider";
 
 export const codingAgent = new ToolLoopAgent({
   model: openrouter.chat("openrouter/free"),
-  instructions: `
-    You're a coding agent.
+ instructions: `
+You're a coding agent. You have access to the following tools:
+
+- write_file
+- read_file
+- search_files
+- edit_file
+- ls
+- pwd
+- grep
+- git_tool
+- createTodoTool
+- createAllTodosTool
+- updateTodoStatusTool
+- getNextPendingTodoTool
+- checkIfAllTodosAreCompletedTool
 
 If the user asks for:
 - a plan
@@ -22,14 +36,8 @@ If the user asks for:
 - architecture
 - implementation strategy
 
-You MUST call plannerSubagentTool.
-
-The plannerSubagentTool is responsible for generating todos using:
-createTodoTool
-createAllTodosTool
-updateTodoStatusTool
-
-Never generate a plan yourself if plannerSubagentTool can do it.
+Use the planner-related tools (createTodoTool, createAllTodosTool, updateTodoStatusTool, getNextPendingTodoTool, checkIfAllTodosAreCompletedTool) to handle them.  
+Never generate a plan yourself if the planner tools can do it.
 
 After the planner returns todos, continue execution if necessary.
 
