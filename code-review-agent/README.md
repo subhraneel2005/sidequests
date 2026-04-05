@@ -37,23 +37,20 @@ A CLI-based AI coding companion im building from scratch while reverse engineeri
 ---
 
 ### Git Tools
-
-| Command | Action |
-|---------|--------|
-| commit | Stage and commit changes with message |
-| push | Push to remote |
-| pull | Pull from remote |
-| issue create | Create new issue |
-| issue edit | Edit existing issue |
-| pr checkout | Checkout PR branch |
-| pr close | Close PR |
-| pr comment | Comment on PR |
-| pr create | Create new PR |
-| pr diff | Show PR diff |
-| pr edit | Edit PR |
-| pr list | List PRs |
-| pr merge | Merge PR |
-| pr status | Show PR status |
+* commit - Stage and commit changes with message
+* push - Push to remote
+* pull - Pull from remote
+* issue create - Create new issue
+* issue edit - Edit existing issue
+* pr checkout - Checkout PR branch
+* pr close - Close PR
+* pr comment - Comment on PR
+* pr create - Create new PR
+* pr diff - Show PR diff
+* pr edit - Edit PR
+* pr list - List PRs
+* pr merge - Merge PR
+* pr status - Show PR status
 
 ---
 
