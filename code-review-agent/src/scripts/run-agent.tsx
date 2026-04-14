@@ -3,7 +3,6 @@ process.on("unhandledRejection", () => {});
 import { LoadAPIKeyError, type ErrorHandler } from "ai";
 import { codingAgent } from "..";
 import type { UserInputQuery } from "../types/agent-types";
-import readline from "readline";
 import type {
   EditFileInput,
   EditFileOutput,
@@ -16,10 +15,10 @@ import { printDiff } from "../utils/print-diff";
 import { Box, render, Text } from "ink";
 import React, { useState } from "react";
 import { PromptInput } from "../components/text-input";
-import Thinking from "../components/thinking";
 import TodoList from "../components/todo-list";
 import Blob from "../components/blob";
 import { ThinkingDots } from "../components/thinking-loader";
+import { existsSync, mkdirSync, writeFileSync } from "fs"
 
 type EditFileResultWithInput = EditFileOutput & { _input: EditFileInput };
 
@@ -33,6 +32,13 @@ export default function RunAgent() {
 
   async function runAgent({ query }: UserInputQuery) {
     const editToolResults: EditFileResultWithInput[] = [];
+
+    if(!existsSync(".agent")){
+      mkdirSync(".agent", {recursive: true})
+    }
+    if(!existsSync(".agent/USER.md")) writeFileSync(".agent/USER.md", "")
+    if(!existsSync(".agent/AGENT.md")) writeFileSync(".agent/AGENT.md", "")
+    if(!existsSync(".agent/PROJECT.md")) writeFileSync(".agent/PROJECT.md", "")
 
     try {
       const result = await codingAgent.stream({
