@@ -344,6 +344,7 @@ export const WriteMemoryInputSchema = z.object({
 
 export const LANG = [
   "node",
+  "bun",
   "python",
   "go",
   "java",
@@ -371,6 +372,10 @@ export const RunCommandSchema = z.object({
     ),
 });
 
+export const WebSearchInputSchema = z.object({
+  searchQuery: z.string().describe("The search query that needs to be searched in the web.")
+})
+
 export type WriteFileProps = z.infer<typeof WriteFileSchema>;
 export type ReadFileProps = z.infer<typeof ReadFileSchema>;
 export type ReadFileResults = z.infer<typeof ReadFileResultSchema>;
@@ -391,4 +396,4 @@ export type UpdateTodoStatus = z.infer<typeof UpdateTodoStatusSchema>;
 export type WriteMemory = z.infer<typeof WriteMemoryInputSchema>;
 export type Lang = (typeof LANG)[number];
 export type RunCommandInput = z.infer<typeof RunCommandSchema>;
-
+export type WebSearchInput = z.infer<typeof WebSearchInputSchema>;

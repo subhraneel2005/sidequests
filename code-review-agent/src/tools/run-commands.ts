@@ -36,3 +36,5 @@ export const runCommandTool = tool({
   inputSchema: RunCommandSchema,
   execute: runCommand,
 });
+
+// TODO: add outputSchema

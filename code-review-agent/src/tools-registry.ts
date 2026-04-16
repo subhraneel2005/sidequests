@@ -17,6 +17,7 @@ import {
 } from "./tools/planner/todo-actions";
 import { writeMemoryTool } from "./tools/memory/write-memory";
 import { runCommandTool } from "./tools/run-commands";
+import { webSearchTool } from "./tools/web/web-search";
 
 export const tools = {
   write_file: writeFileTool,
@@ -37,6 +38,7 @@ export const tools = {
   checkIfAllTodosAreCompletedTool,
 
   write_memory: writeMemoryTool,
-  run_command: runCommandTool
+  run_command: runCommandTool,
+  web_search: webSearchTool
 
 } satisfies ToolSet;

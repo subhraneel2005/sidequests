@@ -8,6 +8,6 @@ function add(a: number, b: number): number {
 describe('add function', () => {
   it('should return the sum of two numbers', () => {
     const result = add(2, 3);
-    expect(result).toBe(5);
+    expect(result).toBe(7);
   });
 });
