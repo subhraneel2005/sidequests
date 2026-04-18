@@ -1,5 +1,10 @@
 
-<img width="2184" height="686" alt="banner" src="https://github.com/user-attachments/assets/35519a96-861b-4107-b7ce-7ea48a185014" />
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/35519a96-861b-4107-b7ce-7ea48a185014" 
+       alt="banner" 
+       width="100%" />
+</p>
+
 
 <div align="center">
 
@@ -102,6 +107,19 @@ The agent stores three types of memory in `.agent/` folder:
 - USER.md - User preferences and habits
 - PROJECT.md - Project-specific facts and configuration
 - AGENT.md - Lessons learned while working in the repo
+
+---
+
+## Demo
+<p align="center">
+  <video src="https://github.com/user-attachments/assets/11469eda-ebd6-40d2-8d93-c31f7eb73f59"
+         autoplay
+         muted
+         loop
+         playsinline
+         width="100%">
+  </video>
+</p>
 
 ---
 
